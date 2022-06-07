@@ -1,0 +1,9 @@
+/home/hcssmith/Projects/Foundation/ConfigReader/bin/Debug/netstandard2.0/ConfigReader.deps.json
+/home/hcssmith/Projects/Foundation/ConfigReader/bin/Debug/netstandard2.0/ConfigReader.dll
+/home/hcssmith/Projects/Foundation/ConfigReader/bin/Debug/netstandard2.0/ConfigReader.pdb
+/home/hcssmith/Projects/Foundation/ConfigReader/obj/Debug/netstandard2.0/ConfigReader.csprojAssemblyReference.cache
+/home/hcssmith/Projects/Foundation/ConfigReader/obj/Debug/netstandard2.0/ConfigReader.AssemblyInfoInputs.cache
+/home/hcssmith/Projects/Foundation/ConfigReader/obj/Debug/netstandard2.0/ConfigReader.AssemblyInfo.cs
+/home/hcssmith/Projects/Foundation/ConfigReader/obj/Debug/netstandard2.0/ConfigReader.csproj.CoreCompileInputs.cache
+/home/hcssmith/Projects/Foundation/ConfigReader/obj/Debug/netstandard2.0/ConfigReader.dll
+/home/hcssmith/Projects/Foundation/ConfigReader/obj/Debug/netstandard2.0/ConfigReader.pdb

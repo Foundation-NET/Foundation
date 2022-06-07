@@ -1,0 +1,17 @@
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/Foundation.deps.json
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/Foundation.dll
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/ref/Foundation.dll
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/Foundation.pdb
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/ConfigReader.dll
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/ConfigReader.pdb
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.csproj.AssemblyReference.cache
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.GeneratedMSBuildEditorConfig.editorconfig
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.AssemblyInfoInputs.cache
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.AssemblyInfo.cs
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.csproj.CoreCompileInputs.cache
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.csproj.CopyComplete
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.dll
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/ref/Foundation.dll
+/home/hcssmith/Projects/Foundation/Foundation/obj/Debug/net6.0/Foundation.pdb
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/Foundation.Annotations.dll
+/home/hcssmith/Projects/Foundation/Foundation/bin/Debug/net6.0/Foundation.Annotations.pdb

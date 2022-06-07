@@ -1,0 +1,12 @@
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/bin/Debug/net6.0/Foundation.Annotations.deps.json
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/bin/Debug/net6.0/Foundation.Annotations.dll
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/bin/Debug/net6.0/ref/Foundation.Annotations.dll
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/bin/Debug/net6.0/Foundation.Annotations.pdb
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.csproj.AssemblyReference.cache
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.GeneratedMSBuildEditorConfig.editorconfig
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.AssemblyInfoInputs.cache
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.AssemblyInfo.cs
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.csproj.CoreCompileInputs.cache
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.dll
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/ref/Foundation.Annotations.dll
+/home/hcssmith/Projects/Foundation/Foundation.Annotations/obj/Debug/net6.0/Foundation.Annotations.pdb
