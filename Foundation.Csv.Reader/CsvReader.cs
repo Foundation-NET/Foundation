@@ -1,5 +1,10 @@
-﻿namespace Foundation.Csv.Reader;
-public class Class1
+﻿namespace Foundation.Csv.Reader
 {
+    public class CsvReader
+    { 
+        public void Read(string File)
+        {
 
+        }
+    }
 }

@@ -10,20 +10,12 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Examples/bin/Debug/net6.0/Examples.dll",
+            "program": "${workspaceFolder}/Foundation.Examples/bin/Debug/net6.0/Examples.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Examples",
+            "cwd": "${workspaceFolder}/Foundation.Examples",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart",
-            "pipeTransport": {
-                "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "bash",
-                "pipeArgs": ["-c"],
-                "debuggerPath": "/nix/store/r94wmcskk983wwififnzgm4lrsxbfkx1-netcoredbg-1.2.0-825/bin/netcoredbg",
-                "quoteArgs": true
-            }
+            "stopAtEntry": false
         },
         {
             "name": ".NET Core Attach",
