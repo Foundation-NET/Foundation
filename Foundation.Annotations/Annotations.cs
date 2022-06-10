@@ -2,6 +2,6 @@
 
 
 namespace Foundation.Annotations {
-    [AttributeUsage(AttributeTargets.All)] 
+    [AttributeUsage(AttributeTargets.Class)] 
     public class FactoryAttribute : Attribute {}
 }
