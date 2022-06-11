@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foundation.ConfigReader\ConfigReader.csproj" />
+    <ProjectReference Include="..\Foundation\Foundation.csproj" />
   </ItemGroup>
 
 </Project>

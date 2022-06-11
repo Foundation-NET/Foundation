@@ -1,11 +1,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Foundation.ConfigReader;
+using System.IO;
 
 namespace Foundation.ConfigReader.Tests
 {
     [TestClass]
     public class ConfigTxtReaderTests
     {
+        [ClassInitialize]
+        public static void CleanData(TestContext t)
+        {
+            if (File.Exists("./Test"))
+                File.Delete("./Test");
+        }
         [TestMethod]
         public void TestWriteReadBlankFile()
         {

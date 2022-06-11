@@ -48,6 +48,8 @@ namespace Foundation.ConfigReader
             var split = Key.Split('.');
             if (split.Length == 2)
             {
+                if (!INIFile.ContainsKey(split[0]))
+                    throw new Exception("No such Key");
                 return INIFile[split[0]][split[1]];
             } else if (split.Length == 1) {
                 return INIFile[""][Key];
@@ -64,11 +66,25 @@ namespace Foundation.ConfigReader
                 Value = "";
             if (split.Length == 2)
             {
-                INIFile[split[0]][split[1]] = Value;
+                if (!INIFile.ContainsKey(split[0]))
+                    INIFile.Add(split[0], new Dictionary<string, string>());
+                if (!INIFile[split[0]].ContainsKey(split[1]))
+                {
+                    INIFile[split[0]].Add(split[1], Value);
+                } else {
+                    INIFile[split[0]][split[1]] = Value;
+                }
             } else if (split.Length == 1) {
-                INIFile[""][Key] = Value;
+                if (!INIFile.ContainsKey(""))
+                    INIFile.Add("", new Dictionary<string, string>());
+                if (!INIFile[""].ContainsKey(Key))
+                {
+                    INIFile[""].Add(Key, Value);
+                } else {
+                    INIFile[""][Key] = Value;
+                }
             }
-            // Write out to file
+            WriteToFile();
         }
         public int Exists(string Key)
         {
@@ -111,7 +127,8 @@ namespace Foundation.ConfigReader
             }
             foreach(KeyValuePair<string, Dictionary<string,string>> keyval in INIFile)
             {
-                
+                if (keyval.Key == "")
+                    continue;   
                 contents.Add("[" + keyval.Key + "]");
                 foreach(KeyValuePair<string,string> subkeyval in keyval.Value)
                 {
