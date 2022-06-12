@@ -63,7 +63,13 @@ namespace Foundation.Examples
         public void Run()
         {
             _Config.SetHeader("Test(string)|Test2(Int32)");
+            _Config.SetFile("./test.csv");
+            var r = _Config.GetAllRows();
 
+            foreach(var v in r)
+            {
+                Console.WriteLine("{0} : {1}", v.GetColByName("Test"), v.GetColByName("Test2"));
+            }
         }
 
     }
