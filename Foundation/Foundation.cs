@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Foundation.ConfigReader;
-
+using Foundation.Csv.Reader;
 namespace Foundation
 {
     
@@ -12,7 +12,8 @@ namespace Foundation
          static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
-                    services.AddSingleton<IConfigReaderFactory, ConfigReaderFactory>()
+                    services.AddSingleton<IConfigReaderFactory, ConfigReaderFactory>().
+                    AddScoped<ICsvReader, CsvReader>()
                             );
 
         
