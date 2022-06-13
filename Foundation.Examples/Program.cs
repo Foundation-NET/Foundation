@@ -24,7 +24,6 @@ namespace Foundation.Examples
         }
     }
 
-    // Inherit ObjectBase to resolved DI
     public class ConfigReaderExample : ObjectBase 
     {
         IConfigReader _Config;
@@ -48,23 +47,23 @@ namespace Foundation.Examples
     }
     public class CsvReaderExample : ObjectBase 
     {
-        ICsvReader _Config;
+        ICsvReader _Csv;
 
         public CsvReaderExample()
         {
             var Scope = CreateScope();
             //ResolveRequired the interface
-            _Config = (ICsvReader)GetRequiredServiceScope<ICsvReader>(Scope);
-            if (_Config == null)
+            _Csv = (ICsvReader)GetRequiredServiceScope<ICsvReader>(Scope);
+            if (_Csv == null)
                 throw new Exception("FFS");
             
         }
 
         public void Run()
         {
-            _Config.SetHeader("Test(string)|Test2(Int32)");
-            _Config.SetFile("./test.csv");
-            var r = _Config.GetAllRows();
+            _Csv.SetHeader("Test(string)|Test2(Int32)");
+            _Csv.SetFile("./test.csv");
+            var r = _Csv.GetAllRows();
 
             foreach(var v in r)
             {
