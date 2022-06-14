@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Foundation.ConfigReader;
 using Foundation.Csv.Reader;
+using Foundation.Csv.Writer;
 namespace Foundation
 {
     
@@ -14,6 +15,7 @@ namespace Foundation
                 .ConfigureServices((_, services) =>
                     services.AddSingleton<IConfigReaderFactory, ConfigReaderFactory>().
                     AddScoped<ICsvReader, CsvReader>()
+                    .AddScoped<ICsvWriter, CsvWriter>()
                             );
 
         

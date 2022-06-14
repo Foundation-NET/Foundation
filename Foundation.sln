@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Csv.Shared", "Fo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.ConfigReader.Tests", "Foundation.ConfigReader.Tests\Foundation.ConfigReader.Tests.csproj", "{87085814-1376-45F1-B0E5-FA8CAB0BDE1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Csv.Writer", "Foundation.Csv.Writer\Foundation.Csv.Writer.csproj", "{52A59526-9E2E-4110-BF5D-424F7A1AE543}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{87085814-1376-45F1-B0E5-FA8CAB0BDE1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87085814-1376-45F1-B0E5-FA8CAB0BDE1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87085814-1376-45F1-B0E5-FA8CAB0BDE1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
