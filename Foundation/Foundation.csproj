@@ -16,7 +16,6 @@
     <ProjectReference Include="..\Foundation.Annotations\Foundation.Annotations.csproj" />
     <ProjectReference Include="..\Foundation.Csv.Reader\Foundation.Csv.Reader.csproj" />
     <ProjectReference Include="..\Foundation.Csv.Writer\Foundation.Csv.Writer.csproj" />
-    <ProjectReference Include="..\Foundation.Mail.Send\Foundation.Mail.Send.csproj" />
   </ItemGroup>
 
 </Project>

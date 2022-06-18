@@ -18,7 +18,6 @@ namespace Foundation
                     services.AddSingleton<IConfigReaderFactory, ConfigReaderFactory>().
                     AddScoped<ICsvReader, CsvReader>()
                     .AddScoped<ICsvWriter, CsvWriter>()
-                    .AddTransient<ISendMail, SendMail>()
                             );
 
         
