@@ -3,7 +3,6 @@ using Microsoft.Extensions.Hosting;
 using Foundation.ConfigReader;
 using Foundation.Csv.Reader;
 using Foundation.Csv.Writer;
-using Foundation.Mail.Send;
 
 namespace Foundation
 {
