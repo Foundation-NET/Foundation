@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation", "Foundation\Fo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Annotations", "Foundation.Annotations\Foundation.Annotations.csproj", "{138A004F-82E0-4D9C-B8C2-F8B8F91B788A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigReader", "Foundation.ConfigReader\ConfigReader.csproj", "{5CD3F490-EC46-4719-BF1A-0FD8071BA6AE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Foundation.Examples\Examples.csproj", "{2256F1F2-31C5-4FD9-BB47-99392294D58A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Csv.Reader", "Foundation.Csv.Reader\Foundation.Csv.Reader.csproj", "{C9933C47-6DF5-458A-BB9D-FBA07ABF6838}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.ConfigReader.Tests", "Foundation.ConfigReader.Tests\Foundation.ConfigReader.Tests.csproj", "{87085814-1376-45F1-B0E5-FA8CAB0BDE1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.Csv.Writer", "Foundation.Csv.Writer\Foundation.Csv.Writer.csproj", "{52A59526-9E2E-4110-BF5D-424F7A1AE543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundation.ConfigReader", "Foundation.ConfigReader\Foundation.ConfigReader.csproj", "{2605B9B0-BD01-4756-B605-EFC9A815770F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +36,6 @@ Global
 		{138A004F-82E0-4D9C-B8C2-F8B8F91B788A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{138A004F-82E0-4D9C-B8C2-F8B8F91B788A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{138A004F-82E0-4D9C-B8C2-F8B8F91B788A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CD3F490-EC46-4719-BF1A-0FD8071BA6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CD3F490-EC46-4719-BF1A-0FD8071BA6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CD3F490-EC46-4719-BF1A-0FD8071BA6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CD3F490-EC46-4719-BF1A-0FD8071BA6AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2256F1F2-31C5-4FD9-BB47-99392294D58A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2256F1F2-31C5-4FD9-BB47-99392294D58A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2256F1F2-31C5-4FD9-BB47-99392294D58A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,5 +56,9 @@ Global
 		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52A59526-9E2E-4110-BF5D-424F7A1AE543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2605B9B0-BD01-4756-B605-EFC9A815770F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2605B9B0-BD01-4756-B605-EFC9A815770F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2605B9B0-BD01-4756-B605-EFC9A815770F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2605B9B0-BD01-4756-B605-EFC9A815770F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

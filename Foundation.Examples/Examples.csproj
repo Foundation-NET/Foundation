@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Foundation.ConfigReader\ConfigReader.csproj" />
+    <ProjectReference Include="..\Foundation.ConfigReader\Foundation.ConfigReader.csproj" />
     <ProjectReference Include="..\Foundation\Foundation.csproj" />
     <ProjectReference Include="..\Foundation.Annotations\Foundation.Annotations.csproj" />
     <ProjectReference Include="..\Foundation.Csv.Reader\Foundation.Csv.Reader.csproj" />

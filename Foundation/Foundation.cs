@@ -6,11 +6,17 @@ using Foundation.Csv.Writer;
 
 namespace Foundation
 {
-    
+    /// <summary>
+    /// Base class for an application, inherit and run ApplicationStart()
+    /// </summary>
     public partial class ApplicationBase
     {
         public static IHost? _Host;
-
+        /// <summary>
+        /// Create the host builder, add any DI classes here.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
          static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
@@ -21,7 +27,10 @@ namespace Foundation
 
         
 
-        // Run this first thing all ObjectBase derived classes rely on this.
+        /// <summary>
+        /// Run to create host and start
+        /// </summary>
+        /// <param name="args">Args from Main</param>
         protected static void ApplicationStart(string[] args)
         {
 

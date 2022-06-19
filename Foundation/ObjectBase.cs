@@ -4,10 +4,16 @@ using Foundation.Annotations;
 
 namespace Foundation
 {
+    /// <summary>
+    /// Base class for any object that needs DI
+    /// </summary>
     public partial class ObjectBase
     {
         private static IServiceProvider _Resolver;
 
+        /// <summary>
+        /// Ensure host exists and populate _Resolver
+        /// </summary>
         static ObjectBase()
         {
             if (ApplicationBase._Host == null)
@@ -17,6 +23,12 @@ namespace Foundation
             _Resolver = ApplicationBase._Host.Services;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="o"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         protected object? Resolve<T>(Object? o = null)
         {
             bool factory = false;
@@ -41,6 +53,12 @@ namespace Foundation
             }
             return service;
         }
+        /// <summary>
+        /// Resolve a required DI service (singlton or transient)
+        /// </summary>
+        /// <param name="o">Parameter to pass to factory builder if nessasary</param>
+        /// <typeparam name="T">Interface to resolve</typeparam>
+        /// <returns>Instace of the interface</returns>
         protected object ResolveRequired<T>(Object? o = null) where T : notnull 
         {
             bool factory = false;
