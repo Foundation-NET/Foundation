@@ -11,22 +11,25 @@ namespace Foundation.Examples
             // Must be first thing run.
             ApplicationStart(args);
 
+            Runner r = new Runner();
+        }
+    }
+
+    public class Runner : ObjectBase
+    {
+        public Runner()
+        {
             Console.WriteLine("ConfigReaderExample");
-            ConfigReaderExample CRE = new ConfigReaderExample();
-            CRE.Run();
+            Launch<ConfigReaderExample>().Run();
             Console.WriteLine("Done");
 
             Console.WriteLine("CsvReaderExample");
-            CsvReaderExample CSE = new CsvReaderExample();
-            CSE.Run();
+            Launch<CsvReaderExample>().Run();
             Console.WriteLine("Done");
 
             Console.WriteLine("CsvWriterExample");
-            CsvWriterExample CSVWriter = new CsvWriterExample();
-            CSVWriter.Run();
+            Launch<CsvWriterExample>(1, 2, 3).Run();
             Console.WriteLine("Done");
-
-
         }
     }
 
@@ -51,7 +54,7 @@ namespace Foundation.Examples
         }
 
     }
-    public class CsvReaderExample : ObjectBase 
+    public class CsvReaderExample : ObjectProcess<Csv.Shared.IRow>
     {
         ICsvReader _Csv;
 
@@ -59,22 +62,29 @@ namespace Foundation.Examples
         {
             var Scope = CreateScope();
             //ResolveRequired the interface
-            _Csv = (ICsvReader)GetRequiredServiceScope<ICsvReader>(Scope);
+            _Csv = (ICsvReader)Scope.GetRequiredServiceScope<ICsvReader>();
             if (_Csv == null)
                 throw new Exception("FFS");
-            
+        }
+
+        public void InitializeDataView()
+        {
+            _Csv.SetHeader("Test(string)|Test2(Int32)");
+            _Csv.SetFile("./test.csv");
+            From  = _Csv.GetAllRows().ToList<Csv.Shared.IRow>();
+            Where = row => (string?)row.GetColByName("Test") == "Some  Other Text";
+            Where = row => (int?)row.GetColByName("Test2") < 4;
         }
 
         public void Run()
         {
-            _Csv.SetHeader("Test(string)|Test2(Int32)");
-            _Csv.SetFile("./test.csv");
-            var r = _Csv.GetAllRows();
+            InitializeDataView();
+            Execute();
+        }
 
-            foreach(var v in r)
-            {
-                Console.WriteLine("{0} : {1}", v.GetColByName("Test"), v.GetColByName("Test2"));
-            }
+        public override void LeaveRow(Csv.Shared.IRow row)
+        {
+            Console.WriteLine("{0} : {1}", row.GetColByIndex(0), row.GetColByIndex(1));
         }
 
     }
@@ -83,14 +93,14 @@ namespace Foundation.Examples
     {
         ICsvWriter _Csv;
 
-        public CsvWriterExample()
+        public CsvWriterExample(int i, int i2, int i3)
         {
             var Scope = CreateScope();
             //ResolveRequired the interface
-            _Csv = (ICsvWriter)GetRequiredServiceScope<ICsvWriter>(Scope);
+            _Csv = (ICsvWriter)Scope.GetRequiredServiceScope<ICsvWriter>();
             if (_Csv == null)
                 throw new Exception("FFS");
-            
+            Console.WriteLine("{0} : {1} : {2}", i, i2, i3);
         }
 
         public void Run()
