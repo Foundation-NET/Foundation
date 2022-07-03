@@ -1,6 +1,8 @@
 ﻿using Foundation.ConfigReader;
 using Foundation.Csv.Reader;
 using Foundation.Csv.Writer;
+using Foundation.Data;
+using Foundation.Data.Entity;
 
 namespace Foundation.Examples
 {
@@ -54,9 +56,12 @@ namespace Foundation.Examples
         }
 
     }
-    public class CsvReaderExample : ObjectProcess<Csv.Shared.IRow>
+    public class CsvReaderExample : ObjectProcess
     {
         ICsvReader _Csv;
+
+        private readonly Order Order;
+        private readonly Customer Customer;
 
         public CsvReaderExample()
         {
@@ -65,15 +70,19 @@ namespace Foundation.Examples
             _Csv = (ICsvReader)Scope.GetRequiredServiceScope<ICsvReader>();
             if (_Csv == null)
                 throw new Exception("FFS");
+
+            Order = new Order();
+            Customer = new Customer();
         }
 
         public void InitializeDataView()
         {
-            _Csv.SetHeader("Test(string)|Test2(Int32)");
-            _Csv.SetFile("./test.csv");
-            From  = _Csv.GetAllRows().ToList<Csv.Shared.IRow>();
-            Where = row => (string?)row.GetColByName("Test") == "Some  Other Text";
-            Where = row => (int?)row.GetColByName("Test2") < 4;
+            From = Order;
+            
+            Relations.Add(Order, Customer, On(Customer.ID, Operators.Eq, Order.ID));
+
+            Where.Add(Order.ID, And(LessThan(5), MoreThan(2)));
+            Where.Add(Customer.Name, EqualTo("Name"));
         }
 
         public void Run()
@@ -82,9 +91,10 @@ namespace Foundation.Examples
             Execute();
         }
 
-        public override void LeaveRow(Csv.Shared.IRow row)
+        public override void ProcessRow()
         {
-            Console.WriteLine("{0} : {1}", row.GetColByIndex(0), row.GetColByIndex(1));
+            Customer.ID.Value = 2;
+            Customer.Name.Value = "Accenture";
         }
 
     }
@@ -116,5 +126,36 @@ namespace Foundation.Examples
             _Csv.CommitFile();
         }
 
+    }
+
+    //DataClasses
+    public class Order : DataEntity
+    {
+        public IntegerColumn ID;
+        public StringColumn Name;
+        public Order()
+        {
+            ID = new IntegerColumn(this) {
+                Name = "ID"
+            };
+            Name = new StringColumn(this) {
+                Name = "Name"
+            };
+        }
+    }
+    public class Customer : DataEntity
+    {
+        public IntegerColumn ID;
+        public StringColumn Name;
+
+        public Customer()
+        {
+            ID = new IntegerColumn(this) {
+                Name = "ID"
+            };
+            Name = new StringColumn(this) {
+                Name = "Name"
+            };
+        }
     }
 }

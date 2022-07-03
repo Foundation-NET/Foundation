@@ -6,6 +6,8 @@
     <ProjectReference Include="..\Foundation.Annotations\Foundation.Annotations.csproj" />
     <ProjectReference Include="..\Foundation.Csv.Reader\Foundation.Csv.Reader.csproj" />
     <ProjectReference Include="..\Foundation.Csv.Writer\Foundation.Csv.Writer.csproj" />
+    <ProjectReference Include="..\Foundation.Data\Foundation.Data.csproj" />
+    <ProjectReference Include="..\Foundation.Data.Entity\Foundation.Data.Entity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

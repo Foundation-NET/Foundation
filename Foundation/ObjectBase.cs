@@ -7,7 +7,7 @@ namespace Foundation
     /// <summary>
     /// Base class for any object that needs DI
     /// </summary>
-    public partial class ObjectBase
+    public partial class ObjectBase : IAuditable
     {
 
         protected string? FunctionRef;
@@ -106,6 +106,12 @@ namespace Foundation
                 return ((IFactoryBuilder)service).GetService(null);
             }
             return service;
+        }
+
+        public List<IAuditRecord> GetAuditRecords()
+        {
+            List<IAuditRecord> rec = new List<IAuditRecord>();
+            return rec;
         }
         protected Scope CreateScope() => new Scope();
         
