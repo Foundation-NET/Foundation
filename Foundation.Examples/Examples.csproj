@@ -8,6 +8,7 @@
     <ProjectReference Include="..\Foundation.Csv.Writer\Foundation.Csv.Writer.csproj" />
     <ProjectReference Include="..\Foundation.Data\Foundation.Data.csproj" />
     <ProjectReference Include="..\Foundation.Data.Entity\Foundation.Data.Entity.csproj" />
+    <ProjectReference Include="..\Foundation.Data.Types\Foundation.Data.Types.csproj" />
   </ItemGroup>
 
   <ItemGroup>

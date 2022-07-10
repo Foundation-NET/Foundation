@@ -3,6 +3,7 @@ using System.Reflection;
 using System;
 using Foundation.Data;
 using Foundation.Data.Entity;
+using Foundation.Data.Types;
 
 namespace Foundation
 {
@@ -25,14 +26,16 @@ namespace Foundation
 
         private DataResultRow? _currentRow;
 
-        private Dictionary<DataEntity, IColumn> _columns;
+        private ColumnCollection _columnCollection;
+        private List<Tuple<DataEntity, ColumnBase>> _entityToColumnMap;
 
         public ObjectProcess()
         :base()
         {
             _DataSource = new DataSource();
             _qb = new QueryBuilder();
-            _columns = new Dictionary<DataEntity, IColumn>();
+            _columnCollection = new ColumnCollection();
+            _entityToColumnMap = new List<Tuple<DataEntity, ColumnBase>>();
         }
 
         public void Execute()
@@ -47,23 +50,27 @@ namespace Foundation
             OnEnd();
         }
 
-        protected void AddColumn(IColumn column)
-        {
-            DataEntity entity = column.GetTable();            
-            _columns.Add(entity, column);
+        protected void AddColumn(DataEntity entity, ColumnBase column)
+        {    _entityToColumnMap.Add(Tuple.Create(entity, column));     
+            _columnCollection.Add(column);
         }
 
         private protected void InRow(DataResultRow d)        
         {
             _currentRow = d;
-            foreach(var v in _columns)
+            foreach(var v in _columnCollection.SeclectAllColumns())
             {
-                var colval = d.Get(v.Value);
-                v.Value.SetValue(colval);
+                var entityColumnTuple = _entityToColumnMap.Find((x) => (x.Item2.Name == v.Name));
+                if (entityColumnTuple != null)
+                    _columnCollection.Update(entityColumnTuple.Item2, d.Get(entityColumnTuple.Item1, entityColumnTuple.Item2));
             }
             ProcessRow();
-            SaveRow();
             
+            SaveRow();
+            foreach(var v in _columnCollection.SeclectAllColumns())
+            {
+                v.Set(new Object());
+            }
             d = new DataResultRow();
         }
 

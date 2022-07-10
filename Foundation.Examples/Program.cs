@@ -3,6 +3,7 @@ using Foundation.Csv.Reader;
 using Foundation.Csv.Writer;
 using Foundation.Data;
 using Foundation.Data.Entity;
+using Foundation.Data.Types;
 
 namespace Foundation.Examples
 {
@@ -135,10 +136,12 @@ namespace Foundation.Examples
         public StringColumn Name;
         public Order()
         {
-            ID = new IntegerColumn(this) {
-                Name = "ID"
+            ID = new IntegerColumn() {
+                Name = "ID",
+                Caption = "ID Column",
+                OnChange = (x) => Console.WriteLine(x.Name)
             };
-            Name = new StringColumn(this) {
+            Name = new StringColumn() {
                 Name = "Name"
             };
         }

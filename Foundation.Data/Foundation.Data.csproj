@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Foundation.Data.Abstractions\Foundation.Data.Abstractions.csproj" />
     <ProjectReference Include="..\Foundation.Data.Entity\Foundation.Data.Entity.csproj" />
+    <ProjectReference Include="..\Foundation.Data.Types\Foundation.Data.Types.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
