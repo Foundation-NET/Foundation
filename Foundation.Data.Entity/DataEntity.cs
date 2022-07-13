@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using Foundation.Data.Types;
 
 namespace Foundation.Data.Entity
@@ -41,5 +39,6 @@ namespace Foundation.Data.Entity
             }
             throw new Exception("Cannot have duplicate column name in an entity");
         }
+        public bool ContainsColumn(ITypedColumn col) => _internalColumnCollection.Contains(col);
     }
 }

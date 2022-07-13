@@ -3,6 +3,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Foundation.Data.Entity\Foundation.Data.Entity.csproj" />
     <ProjectReference Include="..\Foundation.Data.Types\Foundation.Data.Types.csproj" />
+    <ProjectReference Include="..\Foundation.Annotations\Foundation.Annotations.csproj" />
+    <ProjectReference Include="..\Foundation.Contracts\Foundation.Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -15,7 +15,7 @@ namespace Foundation.Data
             _Connection.Open(connstring);
         }
 
-        public List<DataResultRow> ExecuteQuery(QueryBuilder query)
+        public List<DataResultSet> ExecuteQuery(QueryBuilder query)
         {
             return _Connection.ExecuteQuery(query);
         }
@@ -31,7 +31,7 @@ namespace Foundation.Data
             {
                 throw new NotImplementedException();
             }
-            public List<DataResultRow> ExecuteQuery(QueryBuilder s)
+            public List<DataResultSet> ExecuteQuery(QueryBuilder s)
             {
                 throw new NotImplementedException();
             }

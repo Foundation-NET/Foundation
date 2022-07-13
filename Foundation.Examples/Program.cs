@@ -78,12 +78,14 @@ namespace Foundation.Examples
 
         public void InitializeDataView()
         {
-            From = Order;
-            
-            Relations.Add(Order, Customer, On(Customer.ID, Operators.Eq, Order.ID));
+            AddEntity(Customer);
+            AddEntity(Order);
 
-            Where.Add(Order.ID, And(LessThan(5), MoreThan(2)));
-            Where.Add(Customer.Name, EqualTo("Name"));
+            AddColumn(Customer.Name);
+            AddColumn(Customer.ID);
+            AddColumn(Order.CustomerID);
+            AddColumn(Order.ID);
+            AddColumn(Order.Name);
         }
 
         public void Run()
@@ -132,7 +134,10 @@ namespace Foundation.Examples
     //DataClasses
     public class Order : DataEntity
     {
+        [PrimaryKey(false,Id =1)]
         public IntegerColumn ID;
+        [ForeignKey(typeof(Customer), false, Type = Relationship.OneToMany)]
+        public IntegerColumn CustomerID;
         public StringColumn Name;
         public Order()
         {
@@ -141,22 +146,28 @@ namespace Foundation.Examples
                 Caption = "ID Column",
                 OnChange = (x) => Console.WriteLine(x.Name)
             };
+            CustomerID = new IntegerColumn()
+            {
+                Name = "CustomerID"
+            };
             Name = new StringColumn() {
                 Name = "Name"
             };
         }
     }
+    
     public class Customer : DataEntity
     {
+        [PrimaryKey(false,Id =1)]
         public IntegerColumn ID;
         public StringColumn Name;
 
         public Customer()
         {
-            ID = new IntegerColumn(this) {
+            ID = new IntegerColumn() {
                 Name = "ID"
             };
-            Name = new StringColumn(this) {
+            Name = new StringColumn() {
                 Name = "Name"
             };
         }

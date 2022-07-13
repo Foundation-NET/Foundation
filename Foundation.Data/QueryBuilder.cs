@@ -1,148 +1,135 @@
 using System.Collections.Generic;
 using Foundation.Data.Entity;
+using Foundation.Data.Types;
+using Foundation.Contracts;
+using Foundation.Annotations;
+
 
 namespace Foundation.Data
 {
     public class QueryBuilder
     {
-        public DataEntity? From;
-        public RelationBuilder Relations;
-        public FilterBuilder Where;
+        private Contract Contract;
+        public ColumnCollection _columns;
+        public EntityCollection _entities;
+
+        public Dictionary<DataEntity, List<PrimaryKey>> _primaryKeysForEntities;
+        public Dictionary<DataEntity, List<ForeignKey>> _foreignKeysForEntities;
+        public bool Built;
 
         public QueryBuilder()
         {
-            Relations = new RelationBuilder();
-            Where = new FilterBuilder();
+            Contract = new Contract(this);
+            _columns = new ColumnCollection();
+            _entities = new EntityCollection();
+            _primaryKeysForEntities = new Dictionary<DataEntity, List<PrimaryKey>>();
+            _foreignKeysForEntities = new Dictionary<DataEntity, List<ForeignKey>>();
+            Built = false;
         }
-
-        public RelationBuilder.Relation.On On(IColumn left, Operators op, IColumn right)
+        [ContractedMethod]
+        public void AddColumns(ColumnCollection c)
         {
-            RelationBuilder.Relation.On on = new RelationBuilder.Relation.On();
-            on.LeftDataColumn = left;
-            on.Operator = op;
-            on.RightDataColumn = right;
-            return on;
+            Contract.New("AddColumns");
+            Contract.Require(_columns);
+            _columns = c;
         }
-        public FilterBuilder.Filter.Condition And(FilterBuilder.Filter.Condition c1, FilterBuilder.Filter.Condition c2)
+        [ContractedMethod]
+        public void AddEntities(EntityCollection e) 
         {
-            FilterBuilder.Filter.Condition c = new FilterBuilder.Filter.Condition();
-            c.Left = c1;
-            c.Op = Operators.And;
-            c.Right = c2;
-            return c;
+            Contract.New("AddEntities");
+            Contract.Require(_entities);
+            _entities = e;
         }
-        public FilterBuilder.Filter.Condition Or(FilterBuilder.Filter.Condition c1, FilterBuilder.Filter.Condition c2)
+        [ContractedMethod]
+        public void Build()
         {
-            FilterBuilder.Filter.Condition c = new FilterBuilder.Filter.Condition();
-            c.Left = c1;
-            c.Op = Operators.Or;
-            c.Right = c2;
-            return c;
-        }
-
-        public FilterBuilder.Filter.Condition EqualTo(Object o)
-        {
-            FilterBuilder.Filter.Condition c = new FilterBuilder.Filter.Condition();
-            c.Left = null;
-            c.Op = Operators.Eq;
-            c.Right = o;
-            return c;
-        }
-        public FilterBuilder.Filter.Condition NotEqualTo(Object o)
-        {
-            FilterBuilder.Filter.Condition c = new FilterBuilder.Filter.Condition();
-            c.Left = null;
-            c.Op = Operators.NEq;
-            c.Right = o;
-            return c;
-        }
-        public FilterBuilder.Filter.Condition MoreThan(Object o)
-        {
-            FilterBuilder.Filter.Condition c = new FilterBuilder.Filter.Condition();
-            c.Left = null;
-            c.Op = Operators.Gt;
-            c.Right = o;
-            return c;
-        }
-        public FilterBuilder.Filter.Condition LessThan(Object o)
-        {
-            FilterBuilder.Filter.Condition c = new FilterBuilder.Filter.Condition();
-            c.Left = null;
-            c.Op = Operators.Lt;
-            c.Right = o;
-            return c;
-        }
-        
-        public class RelationBuilder {
-            public List<Relation> Joins;
-
-            public RelationBuilder()
+            // Chcek required instance variables
+            Contract.New("Build");
+            Contract.Require(_columns, (x) => ((ColumnCollection)x).Count() > 0);
+            Contract.Require(_entities, (x) => ((EntityCollection)x).Count() > 0);
+            Contract.Require(_primaryKeysForEntities);
+            Contract.Require(_foreignKeysForEntities);
+            // Get PrimaryKey from entities
+            foreach (var entity in _entities)
             {
-                Joins = new List<Relation>();
-            }
-
-            public void Add(DataEntity left, DataEntity right, params Relation.On[] ons)
-            {
-                Relation r = new Relation();
-                r.LeftTable = left;
-                r.RightTable = right;
-                foreach (Relation.On on in ons)
+                Dictionary<int, PrimaryKey> primaryKeyListWithID = new Dictionary<int, PrimaryKey>(); 
+                Dictionary<int, ForeignKey> foreignKeyListWithID = new Dictionary<int, ForeignKey>(); 
+                foreach (var prop in entity.GetType().GetProperties())
                 {
-                    r.OnClauses.Add(on);
+                    Attribute[] attrs = Attribute.GetCustomAttributes(prop);
+
+                    foreach(Attribute attr in attrs)
+                    {
+                        
+                        if (attr is PrimaryKeyAttribute)
+                        {
+                            int id = ((PrimaryKeyAttribute)attr).Id;
+                            ITypedColumn? col = (ITypedColumn?)prop.GetValue(entity);
+                            if (primaryKeyListWithID.ContainsKey(id) && col != null)
+                            {
+                                primaryKeyListWithID[id].Add(col);
+                            } else if (!primaryKeyListWithID.ContainsKey(id) && col != null)
+                            {
+                                primaryKeyListWithID.Add(id, new PrimaryKey(id, col));
+                            }
+                        } else if (attr is ForeignKeyAttribute)
+                        {
+                            int id = ((ForeignKeyAttribute)attr).Id;
+                            ITypedColumn? col = (ITypedColumn?)prop.GetValue(entity);
+                            Type? ent  = ((ForeignKeyAttribute)attr).Table;
+                            if(foreignKeyListWithID.ContainsKey(id) && col != null)
+                            {
+                                foreignKeyListWithID[id].Add(col);
+                                foreignKeyListWithID[id].ForeignTable = ent;
+                            } else if (!foreignKeyListWithID.ContainsKey(id) && col != null)
+                            {
+                                foreignKeyListWithID.Add(id, new ForeignKey(id, col));
+                                foreignKeyListWithID[id].ForeignTable = ent;
+                            }
+
+                        }
+                    }
+
                 }
-            }
-
-            public class Relation
-            {
-                public DataEntity LeftTable;
-                public DataEntity RightTable;
-
-                public List<On> OnClauses;
-                public Relation()
+                List<PrimaryKey> pKeyList = new List<PrimaryKey>();
+                List<ForeignKey> fKeyList = new List<ForeignKey>();
+                foreach(var pKey in primaryKeyListWithID)
                 {
-                    LeftTable = new DataEntity();
-                    RightTable = new DataEntity();
-                    OnClauses = new List<On>();
+                    pKeyList.Add(pKey.Value);
                 }
-
-                public class On
+                foreach(var fKey in foreignKeyListWithID)
                 {
-                    public IColumn? LeftDataColumn;
-                    public IColumn? RightDataColumn;
-                    public Operators? Operator;
+                    fKeyList.Add(fKey.Value);
                 }
+                _primaryKeysForEntities.Add(entity, pKeyList);
+                _foreignKeysForEntities.Add(entity, fKeyList);
+
             }
+            Built = true;
         }
-        public class FilterBuilder
+
+
+        public class PrimaryKey
         {
-            public List<Filter> FilterTreCollection;
-            public FilterBuilder()
+            public int Id;
+            public List<ITypedColumn> Columns;
+            public PrimaryKey(int id, params ITypedColumn[] columns)
             {
-                FilterTreCollection = new List<Filter>();
+                Columns = columns.ToList<ITypedColumn>();
             }
-            public class Filter
+            public void Add(ITypedColumn col) => Columns.Add(col);
+        }
+
+        public class ForeignKey
+        {
+            public int Id;
+            public Type? ForeignTable;
+            public List<ITypedColumn> Columns;
+            public ForeignKey(int id, params ITypedColumn[] columns)
             {
-                public IColumn? Column;
-                public Condition? ConditionTree;
-
-                public class Condition
-                {
-                    public Object? Left;
-                    public Operators Op;
-                    public Object? Right;                    
-                }
-
-                
+                Columns = columns.ToList<ITypedColumn>();
             }
-
-            public void Add(IColumn col, Filter.Condition condition)
-            {
-                Filter f = new Filter();
-                f.Column = col;
-                f.ConditionTree = condition;
-
-                this.FilterTreCollection.Add(f);
-            }
+            public void Add(ITypedColumn col) => Columns.Add(col);
         }
     }
 }

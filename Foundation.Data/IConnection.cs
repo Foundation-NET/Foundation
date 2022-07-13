@@ -5,7 +5,7 @@ namespace Foundation.Data
     public interface IConnection
     {
         void Open(string connectionString);
-        List<DataResultRow> ExecuteQuery(QueryBuilder qb);
+        List<DataResultSet> ExecuteQuery(QueryBuilder qb);
         void Close();
 
     }
