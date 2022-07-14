@@ -13,7 +13,7 @@ namespace Foundation.Data
         public ColumnCollection _columns;
         public EntityCollection _entities;
 
-        public Dictionary<DataEntity, List<DataEntity.PrimaryKey>> _primaryKeysForEntities;
+        public Dictionary<DataEntity, DataEntity.PrimaryKey> _primaryKeysForEntities;
         public Dictionary<DataEntity, List<DataEntity.ForeignKey>> _foreignKeysForEntities;
         public bool Built;
 
@@ -22,7 +22,7 @@ namespace Foundation.Data
             Contract = new Contract(this);
             _columns = new ColumnCollection();
             _entities = new EntityCollection();
-            _primaryKeysForEntities = new Dictionary<DataEntity, List<DataEntity.PrimaryKey>>();
+            _primaryKeysForEntities = new Dictionary<DataEntity, DataEntity.PrimaryKey>();
             _foreignKeysForEntities = new Dictionary<DataEntity, List<DataEntity.ForeignKey>>();
             Built = false;
         }
@@ -52,7 +52,7 @@ namespace Foundation.Data
             // Get PrimaryKey from entities
             foreach (var entity in _entities)
             {
-                _primaryKeysForEntities.Add(entity, entity.GetPrimaryKeys());
+                _primaryKeysForEntities.Add(entity, entity.GetPrimaryKey());
                 _foreignKeysForEntities.Add(entity, entity.GetForeignKeys());
             }
             Built = true;

@@ -135,7 +135,7 @@ namespace Foundation.Examples
     //DataClasses
     public class Order : DataEntity
     {
-        [PrimaryKey(false,Id =1)]
+        [PrimaryKey(false)]
         public IntegerColumn ID;
         [ForeignKey(typeof(Customer), false, Type = Relationship.OneToMany)]
         public IntegerColumn CustomerID;
@@ -163,7 +163,7 @@ namespace Foundation.Examples
     
     public class Customer : DataEntity
     {
-        [PrimaryKey(false,Id =1)]
+        [PrimaryKey(false)]
         public IntegerColumn ID;
         public StringColumn Name;
 

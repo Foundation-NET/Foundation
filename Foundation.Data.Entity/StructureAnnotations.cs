@@ -7,7 +7,6 @@ namespace Foundation.Data.Entity {
     [AttributeUsage(AttributeTargets.Field)] 
     public class PrimaryKeyAttribute : Attribute {
         public bool Compound;
-        public int Id;
         public PrimaryKeyAttribute(bool compound)
         {
             Compound = compound;

@@ -42,36 +42,27 @@ namespace Foundation.Data.Entity
         }
         public bool ContainsColumn(ITypedColumn col) => _internalColumnCollection.Contains(col);
         public ColumnCollection GetColumns() => _internalColumnCollection;
-        public List<PrimaryKey> GetPrimaryKeys()
+        public PrimaryKey GetPrimaryKey()
         {
-            Dictionary<int, PrimaryKey> primaryKeyListWithID = new Dictionary<int, PrimaryKey>(); 
+            List<ITypedColumn> columns = new List<ITypedColumn>();
             PropertyInfo[] properties = this.GetType().GetProperties();
             foreach (var prop in properties)
             {
                 Attribute[] attrs = Attribute.GetCustomAttributes(prop);
                 foreach(Attribute attr in attrs)
                 {
-                    
                     if (attr is PrimaryKeyAttribute)
                     {
-                        int id = ((PrimaryKeyAttribute)attr).Id;
                         ITypedColumn? col = (ITypedColumn?)prop.GetValue(this);
-                        if (primaryKeyListWithID.ContainsKey(id) && col != null)
-                        {
-                            primaryKeyListWithID[id].Add(col);
-                        } else if (!primaryKeyListWithID.ContainsKey(id) && col != null)
-                        {
-                            primaryKeyListWithID.Add(id, new PrimaryKey(id, col));
-                        }
+                        if (col != null)
+                            columns.Add(col);
                     }
                 }
             }
-            List<PrimaryKey> pKeyList = new List<PrimaryKey>();
-            foreach(var pKey in primaryKeyListWithID)
-            {
-                pKeyList.Add(pKey.Value);
-            }
-            return pKeyList;
+            PrimaryKey pkey = new PrimaryKey(columns.ToArray());
+            if (columns.Count > 1)
+                pkey.Compound = true;
+            return pkey;
         }
         public List<ForeignKey> GetForeignKeys()
         {
@@ -106,9 +97,9 @@ namespace Foundation.Data.Entity
         }
         public class PrimaryKey
         {
-            public int Id;
+            public bool Compound;
             public List<ITypedColumn> Columns;
-            public PrimaryKey(int id, params ITypedColumn[] columns)
+            public PrimaryKey(params ITypedColumn[] columns)
             {
                 Columns = columns.ToList<ITypedColumn>();
             }
