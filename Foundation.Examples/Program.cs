@@ -4,6 +4,7 @@ using Foundation.Csv.Writer;
 using Foundation.Data;
 using Foundation.Data.Entity;
 using Foundation.Data.Types;
+using static Foundation.Data.Entity.EntityRegister;
 
 namespace Foundation.Examples
 {
@@ -153,6 +154,10 @@ namespace Foundation.Examples
             Name = new StringColumn() {
                 Name = "Name"
             };
+            AddColumn(ID);
+            AddColumn(CustomerID);
+            AddColumn(Name);
+            RegisterEntity(this);
         }
     }
     
@@ -170,6 +175,9 @@ namespace Foundation.Examples
             Name = new StringColumn() {
                 Name = "Name"
             };
+            AddColumn(ID);
+            AddColumn(Name);
+            RegisterEntity(this);
         }
     }
 }

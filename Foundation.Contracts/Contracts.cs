@@ -7,11 +7,36 @@ namespace Foundation.Contracts
         private Object _contrator;
         private List<string> _contracts;
         private string _currentContract;
+        private Contract.Type _type;
         public Contract(object o)
         {
             _contracts = new List<string>();
             _contrator = o;
             _currentContract = string.Empty;
+            _type = Type.Object;
+        }
+        public Contract(Contract.Type type, object? o = null)
+        {
+            if (type == Type.Static)
+            {
+                _type = type;
+                _contrator = new object();
+                _contracts = new List<string>();
+                _currentContract = string.Empty;
+                
+            } else if (type == Type.Object)
+            {
+                _contracts = new List<string>();
+                _contrator = o;
+                _currentContract = string.Empty;
+                _type = type;
+            }
+        }
+
+        public enum Type
+        {
+            Static,
+            Object
         }
 
         public void New(string contractName, bool runOnce = false)
