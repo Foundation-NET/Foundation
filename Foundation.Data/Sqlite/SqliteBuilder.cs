@@ -45,6 +45,7 @@ namespace Foundation.Data.Sqlite
 
             return new List<DataResultSet>();
         }
+        [ContractedMethod]
         public void CreateStructure()
         {
             Contract.New("CreateStructure");
@@ -52,16 +53,14 @@ namespace Foundation.Data.Sqlite
             Contract.Require(EntityRegister.GetDataEntities(), (x) => ((EntityCollection)x).Count() > 0);
             foreach(var v in EntityRegister.GetDataEntities())
             {
-                //     string sql = @"
-                // CREATE TABLE cars(id INTEGER PRIMARY KEY,
-                // name TEXT, price INT)";
 
-                // check if table exists? TSQL if Exists Do -->
+                string tblcheck = "SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}';";
 
-                var pkeylist = v.GetPrimaryKeys();
+                var pkey = v.GetPrimaryKey();
                 var fkeylist = v.GetForeignKeys();
 
                 // get itypedcol PrimaryKey (check how swlite handles compund primary keys)
+
 
 
                 string sql = "CREATE TABLE [" + v.EntityName + "](";
@@ -70,12 +69,37 @@ namespace Foundation.Data.Sqlite
                 ColumnCollection collection = v.GetColumns();
                 foreach (ITypedColumn col in collection)
                 {
+                    string cname = "";
                     // mark pkey
                     string colName = col.Name;
-                    SQLiteTypes colType = GetColumnType(col); 
-                    // append column to sql
+                    cname = "[" + col.Name + "] ";
+                    SQLiteTypes colType = GetColumnType(col);
+                    switch (colType)
+                    {
+                        case SQLiteTypes.Null:
+                            cname += "NULL";
+                            break;
+                        case SQLiteTypes.Integer:
+                            cname += "INTEGER";
+                            break;
+                        case SQLiteTypes.Real:
+                            cname += "REAL";
+                            break;
+                        case SQLiteTypes.Text:
+                            cname += "TEXT";
+                            break;
+                        case SQLiteTypes.Blob:
+                            cname += "BLOB";
+                            break;
+                        default:
+                            cname += "NULL";
+                            break;
+                    }
+                    sql = sql + "\n" + cname + ","; 
+
                 }
-                //append foreign keys
+                // append primary key
+                // append foreign keys
                 // append to sql run
 
             }
